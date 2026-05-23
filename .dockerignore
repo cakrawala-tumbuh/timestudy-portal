@@ -1,0 +1,10 @@
+.next
+node_modules
+.env*.local
+.env
+npm-debug.log*
+Dockerfile
+.dockerignore
+.github
+*.md
+coverage

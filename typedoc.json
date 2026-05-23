@@ -1,0 +1,16 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/lib/api.ts", "src/lib/utils.ts", "src/lib/auth.ts", "src/types/index.ts"],
+  "out": "docs",
+  "name": "TimeStudy Portal YPII",
+  "includeVersion": true,
+  "readme": "README.md",
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "githubPages": false,
+  "hideGenerator": true,
+  "navigationLinks": {
+    "GitHub": "https://github.com/cakrawala-tumbuh/timestudy-portal",
+    "Backend Docs": "https://timestudy-backend.readthedocs.io/id/latest/"
+  }
+}

@@ -1,0 +1,23 @@
+# Read the Docs configuration — timestudy-portal-ypii
+# https://docs.readthedocs.io/en/stable/config-file/v2.html
+#
+# Documentation tool: TypeDoc (reads TSDoc comments from TypeScript source)
+# TypeDoc is run via custom build.commands because RTD does not have a native
+# TypeDoc build type. The generated HTML is copied to $READTHEDOCS_OUTPUT/html.
+
+version: 2
+
+build:
+  os: ubuntu-24.04
+  tools:
+    nodejs: "20"
+  commands:
+    # Install all dependencies (includes typedoc as a devDependency)
+    - npm ci
+
+    # Generate TypeDoc HTML → docs/
+    - npm run docs
+
+    # Copy the generated site to the RTD output directory
+    - mkdir -p $READTHEDOCS_OUTPUT/html
+    - cp -r docs/. $READTHEDOCS_OUTPUT/html/

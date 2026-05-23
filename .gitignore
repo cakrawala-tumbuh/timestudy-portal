@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+.next/
+out/
+dist/
+
+# Env files — NEVER commit these
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Test coverage
+coverage/
+
+# Misc
+*.tsbuildinfo
+next-env.d.ts
+
+# Runtime branding config & uploaded logo (dibuat saat runtime)
+data/branding.json
+data/logo.jpg
+data/logo.png
+data/logo.webp
+
+# Generated documentation (built by CI, deployed to GitHub Pages)
+docs/

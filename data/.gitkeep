@@ -1,0 +1,7 @@
+# Runtime branding config (dibuat otomatis saat pertama kali diubah)
+data/branding.json
+
+# Logo yang di-upload
+data/logo.jpg
+data/logo.png
+data/logo.webp
