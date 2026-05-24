@@ -20,6 +20,14 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
+  // Inject Authorization header for API proxy requests so the backend always
+  // receives the Bearer token without relying on client-side getSession().
+  if (pathname.startsWith("/api/v1") && token.accessToken) {
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("Authorization", `Bearer ${token.accessToken as string}`);
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
+
   return NextResponse.next();
 }
 
