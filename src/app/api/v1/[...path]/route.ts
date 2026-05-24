@@ -28,6 +28,7 @@ async function proxy(
   // Inject Authorization header directly from the NextAuth JWT cookie.
   // This is more reliable than relying on middleware header propagation.
   const token = await getToken({ req });
+  console.log(`[proxy] ${req.method} ${target} | token=${token ? "ok" : "null"} | accessToken=${token?.accessToken ? "ok" : "missing"} | Authorization=${headers.has("Authorization") ? "present" : "absent"}`);
   if (token?.accessToken) {
     headers.set("Authorization", `Bearer ${token.accessToken as string}`);
   }
