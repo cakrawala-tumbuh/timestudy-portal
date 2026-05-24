@@ -9,6 +9,7 @@
  * @module api-proxy
  */
 
+import { getToken } from "next-auth/jwt";
 import { type NextRequest, NextResponse } from "next/server";
 
 const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:8000";
@@ -23,6 +24,13 @@ async function proxy(
 
   const headers = new Headers(req.headers);
   headers.delete("host");
+
+  // Inject Authorization header directly from the NextAuth JWT cookie.
+  // This is more reliable than relying on middleware header propagation.
+  const token = await getToken({ req });
+  if (token?.accessToken) {
+    headers.set("Authorization", `Bearer ${token.accessToken as string}`);
+  }
 
   const init: RequestInit & { duplex?: string } = { method: req.method, headers };
 
