@@ -10,7 +10,7 @@
 services:
 
   backend:
-    image: ghcr.io/cakrawala-tumbuh/timestudy-backend:latest
+    image: timestudy-backend:e2e
     environment:
       DATABASE_URL: "sqlite:////data/timestudy-e2e.db"
       SECRET_KEY: "e2e-secret-key-not-for-production"
