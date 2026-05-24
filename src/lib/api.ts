@@ -2,8 +2,9 @@
  * Axios-based API client for the TimeStudy YPII backend.
  *
  * All request functions automatically inject the `Authorization: Bearer` header
- * from the active NextAuth session. The base URL is read from the
- * `NEXT_PUBLIC_API_URL` environment variable at build time.
+ * from the active NextAuth session. Requests are sent to `/api/v1` (relative
+ * path) and proxied by the Next.js server to the backend via the `BACKEND_URL`
+ * rewrite rule defined in `next.config.ts`.
  *
  * @module api
  */
@@ -22,10 +23,8 @@ import type {
   RespondentUpdate,
 } from "@/types";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
-
 export const apiClient = axios.create({
-  baseURL: `${BASE_URL}/api/v1`,
+  baseURL: `/api/v1`,
   headers: { "Content-Type": "application/json" },
 });
 
