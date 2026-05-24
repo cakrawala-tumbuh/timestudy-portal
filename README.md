@@ -1,5 +1,10 @@
 # TimeStudy Portal YPII
 
+[![CI](https://github.com/cakrawala-tumbuh/timestudy-portal/actions/workflows/ci.yml/badge.svg)](https://github.com/cakrawala-tumbuh/timestudy-portal/actions/workflows/ci.yml)
+[![Publish](https://github.com/cakrawala-tumbuh/timestudy-portal/actions/workflows/publish.yml/badge.svg)](https://github.com/cakrawala-tumbuh/timestudy-portal/actions/workflows/publish.yml)
+[![Docker Image](https://img.shields.io/badge/container-ghcr.io%2Fcakrawala--tumbuh%2Ftimestudy--portal-blue?logo=docker)](https://github.com/cakrawala-tumbuh/timestudy-portal/pkgs/container/timestudy-portal)
+[![Docs](https://img.shields.io/badge/docs-TypeDoc-orange?logo=readthedocs)](https://cakrawala-tumbuh.github.io/timestudy-portal/)
+
 Admin portal for the TimeStudy YPII workforce time study application.
 
 ## Stack
