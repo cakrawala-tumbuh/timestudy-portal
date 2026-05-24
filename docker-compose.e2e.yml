@@ -12,7 +12,7 @@ services:
   backend:
     image: ghcr.io/cakrawala-tumbuh/timestudy-backend:latest
     environment:
-      DATABASE_URL: "sqlite:///./timestudy-e2e.db"
+      DATABASE_URL: "sqlite:////data/timestudy-e2e.db"
       SECRET_KEY: "e2e-secret-key-not-for-production"
       ALGORITHM: HS256
       ACCESS_TOKEN_EXPIRE_MINUTES: 60
