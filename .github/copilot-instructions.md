@@ -94,12 +94,52 @@ Jika refresh gagal → `token.error = "RefreshTokenError"`. UI dapat membaca `se
 
 | Event | Job |
 |---|---|
-| Push / PR ke `master` | `lint`, `unit test`, `e2e` |
+| PR ke `master` | `lint`, `unit test`, `e2e` |
 | Push tag `v*` | `publish` (build + push Docker image ke GHCR) |
 | `workflow_dispatch` | Semua job CI |
+
+- PR **tidak boleh** di-merge jika ada job CI yang gagal.
+- Push langsung ke `master` **tidak** mentrigger CI — semua harus via PR.
 
 ### E2E Tests (`docker-compose.e2e.yml`)
 
 - Backend dan portal di-build dari source lokal (bukan dari GHCR) — GHCR package bisa private.
 - Backend menggunakan `DATABASE_URL: sqlite:////data/timestudy-e2e.db` — path absolut ke `/data` yang di-chown ke `appuser` di Dockerfile. **Jangan** pakai path relatif (`sqlite:///./...`) karena `/app` dimiliki root.
 - Portal image di-tag `timestudy-portal:e2e` dan dipakai di compose.
+
+---
+
+## Workflow Git & Versioning
+
+### Commit
+- Saat diminta commit, lakukan langsung.
+- Format commit message: `<type>(<scope>): <deskripsi singkat>`
+  - Types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `ci`, `build`
+  - Scope opsional: nama komponen, halaman, atau file utama yang berubah
+  - Tambahkan body untuk menjelaskan **apa** yang berubah dan **mengapa** jika tidak sudah jelas
+- Contoh: `feat(respondents): tambah filter pencarian berdasarkan nama`
+
+### Push
+- Saat diminta push, push ke branch fitur aktif — **bukan** `master`.
+- `master` hanya bisa diubah via Pull Request yang sudah lulus semua CI test.
+- Contoh: `git push origin feature/nama-fitur`
+
+### Branch Strategy
+- `master`: protected — semua perubahan via PR.
+- Nama branch: `feature/<nama>`, `fix/<nama>`, `chore/<nama>`, `docs/<nama>`
+
+### Versioning & Tagging
+Format: `vMAJOR.MINOR.PATCH` (Semantic Versioning)
+
+| Jenis Perubahan | Bump | Contoh |
+|---|---|---|
+| Bug fix, hotfix, perbaikan kecil, docs | PATCH | `v1.0.0` → `v1.0.1` |
+| Fitur baru, perubahan non-breaking | MINOR | `v1.0.0` → `v1.1.0` |
+| Breaking change, perombakan arsitektur, perubahan API | MAJOR | `v1.0.0` → `v2.0.0` |
+
+- Saat diminta membuat tag, tentukan bump berdasarkan tabel di atas, lalu:
+  ```
+  git tag -a vX.Y.Z -m "<ringkasan perubahan>"
+  git push origin vX.Y.Z
+  ```
+- Tag dibuat di commit `master` terbaru (setelah PR di-merge).
